@@ -111,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
             webView.reload();
         });
 
+        // Désactiver le swipe refresh sauf quand on est tout en haut de la page
+        webView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            // Activer le pull-to-refresh UNIQUEMENT si la WebView est tout en haut
+            swipeRefresh.setEnabled(scrollY == 0);
+        });
+
         // Bouton retry sur l'écran d'erreur
         findViewById(R.id.btnRetry).setOnClickListener(v -> {
             errorScreen.setVisibility(View.GONE);
